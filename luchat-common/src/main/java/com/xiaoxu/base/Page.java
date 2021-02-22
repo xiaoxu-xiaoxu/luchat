@@ -9,7 +9,7 @@ import java.util.Map;
  * @create 2021/2/4 17:22
  */
 @Data
-public class Page<T>{
+public class Page{
 
     private Integer pageNo;
 

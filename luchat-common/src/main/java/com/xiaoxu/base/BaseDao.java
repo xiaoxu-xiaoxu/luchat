@@ -148,7 +148,7 @@ public abstract class BaseDao{
 	 * @param <T>
 	 * @return
 	 */
-		public <T> PageInfo<T> selectPage(String statementName, Page<T> page){
+		public <T> PageInfo<T> selectPage(String statementName, Page page){
 			PageHelper.startPage(page.getPageNo(), page.getPageSize());
 			List<T> list = sqlSession.selectList(statementName, page.getParam());
 			return new PageInfo<>(list);

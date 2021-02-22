@@ -10,7 +10,7 @@ public class DBConcurrencyException extends RuntimeException{
     public DBConcurrencyException(){
     }
 
-    public DBConcurrencyException(final String message){
+    public DBConcurrencyException(String message){
         super(message);
     }
 }
