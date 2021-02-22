@@ -1,6 +1,7 @@
 package com.xiaoxu.service;
 
 import com.github.pagehelper.PageInfo;
+import com.xiaoxu.base.JsonResp;
 import com.xiaoxu.bean.User;
 
 import java.util.HashMap;
@@ -15,4 +16,6 @@ public interface IUserService{
 
 
     PageInfo<User> selectUserByPage(Integer pageNo, Integer pageSize, Map<String, Object> param);
+
+    JsonResp register(User user);
 }

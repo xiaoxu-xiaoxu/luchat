@@ -12,6 +12,9 @@ import java.util.Map;
 
 public interface IUserDao{
 
-    PageInfo<User> selectUserByPage(Page<User> page);
+    PageInfo<User> selectUserByPage(Page page);
 
+    void insertSelective(User user);
+
+    Integer selectUserByPhone(User user);
 }

@@ -2,6 +2,7 @@ package com.xiaoxu;
 
 import com.xiaoxu.dao.impl.UserDao;
 import org.junit.Test;
+import sun.security.provider.MD5;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -13,6 +14,11 @@ import java.util.Map;
 public class Test1{
 
     UserDao userDao = new UserDao();
+
+    @Test
+    public void test1(){
+
+    }
 
     @Test
     public void test() throws Exception{

@@ -196,4 +196,12 @@
     </if>
   </select>
 
+  <select id="selectUserByPhone" parameterType="com.xiaoxu.bean.User" resultType="int">
+    select id
+    from t_lu_user
+    where del_flg = 0
+    and phone = #{phone,jdbcType=VARCHAR}
+    limit 1
+  </select>
+
 </mapper>

@@ -15,7 +15,17 @@ import org.springframework.stereotype.Component;
 public class UserDao extends BaseDao implements IUserDao{
 
     @Override
-    public PageInfo<User> selectUserByPage(Page<User> page){
+    public PageInfo<User> selectUserByPage(Page page){
         return super.selectPage("t_lu_user.selectUserByPage", page);
+    }
+
+    @Override
+    public void insertSelective(User user){
+        super.insert("t_lu_user.insertSelective", user);
+    }
+
+    @Override
+    public Integer selectUserByPhone(User user){
+        return super.selectOne("t_lu_user.selectUserByPhone", user);
     }
 }
