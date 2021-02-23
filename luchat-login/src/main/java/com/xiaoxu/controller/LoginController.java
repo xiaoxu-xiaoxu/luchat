@@ -3,6 +3,7 @@ package com.xiaoxu.controller;
 import com.github.pagehelper.PageInfo;
 import com.xiaoxu.base.BaseController;
 import com.xiaoxu.base.JsonResp;
+import com.xiaoxu.base.RedisService;
 import com.xiaoxu.bean.User;
 import com.xiaoxu.service.IUserService;
 import org.springframework.web.bind.annotation.RequestMapping;

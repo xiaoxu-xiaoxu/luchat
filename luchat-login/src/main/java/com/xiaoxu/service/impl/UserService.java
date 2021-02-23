@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.xiaoxu.base.BaseService;
 import com.xiaoxu.base.JsonResp;
 import com.xiaoxu.base.Page;
+import com.xiaoxu.base.RedisService;
 import com.xiaoxu.bean.User;
 import com.xiaoxu.constants.APIConstants;
 import com.xiaoxu.dao.IUserDao;
@@ -15,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author xx
@@ -26,6 +29,9 @@ public class UserService extends BaseService implements IUserService{
 
     @Resource
     private IUserDao userDao;
+
+    @Resource
+    private RedisService redisService;
 
     @Override
     public PageInfo<User> selectUserByPage(Integer pageNo, Integer pageSize, Map<String, Object> param){
@@ -50,5 +56,15 @@ public class UserService extends BaseService implements IUserService{
         resp.setResult(APIConstants.RESULT_SUCCESS);
         resp.setMsg("注册成功");
         return resp;
+    }
+
+    @Override
+    public String getAuthCode(String phone){
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < 6; i++){
+            builder.append(new Random().nextInt(10));
+        }
+        redisService.expire(phone, builder.toString(), 1L, TimeUnit.MINUTES);
+        return builder.toString();
     }
 }

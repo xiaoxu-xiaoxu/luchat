@@ -5,7 +5,7 @@
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%date|%thread|%X{invokeNo}|%level|%logger{0}|%msg%n</pattern>
+            <pattern>%date  |%thread  |%X{invokeNo}  |%level  |%logger{0}  |%msg%n</pattern>
         </encoder>
     </appender>
 
@@ -26,7 +26,7 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%date|%thread|%X{invokeNo}|%level|%logger{0}|%msg%n</pattern>
+            <pattern>%date  |%thread  |%X{invokeNo}  |%level  |%logger{0}  |%msg%n</pattern>
         </encoder>
     </appender>
 

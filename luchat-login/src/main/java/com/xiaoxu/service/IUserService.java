@@ -18,4 +18,6 @@ public interface IUserService{
     PageInfo<User> selectUserByPage(Integer pageNo, Integer pageSize, Map<String, Object> param);
 
     JsonResp register(User user);
+
+    String getAuthCode(String phone);
 }

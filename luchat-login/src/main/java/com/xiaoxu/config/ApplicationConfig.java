@@ -1,5 +1,6 @@
 package com.xiaoxu.config;
 
+import com.xiaoxu.base.RedisService;
 import com.xiaoxu.filter.LogFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -25,5 +26,10 @@ public class ApplicationConfig{
         filter.setOrder(1);
         filter.addUrlPatterns("/*");
         return filter;
+    }
+
+    @Bean
+    public RedisService getRedisUtils(){
+        return new RedisService();
     }
 }
