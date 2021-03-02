@@ -1,12 +1,14 @@
 package com.xiaoxu.controller;
 
+import cn.hutool.Hutool;
+import cn.hutool.core.util.StrUtil;
+import com.alibaba.druid.util.StringUtils;
 import com.xiaoxu.base.BaseController;
 import com.xiaoxu.base.JsonResp;
 import com.xiaoxu.base.RedisService;
 import com.xiaoxu.bean.User;
 import com.xiaoxu.constants.APIConstants;
 import com.xiaoxu.service.IUserService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +32,7 @@ public class RegisterController extends BaseController{
     @RequestMapping("register")
     public JsonResp register(User user, String authCode){
         JsonResp resp = new JsonResp();
-        if(StringUtils.isAnyEmpty(user.getName(), user.getPassword(), user.getPhone(), user.getEmail(), authCode)){
+        if(StrUtil.hasEmpty(user.getName(), user.getPassword(), user.getPhone(), user.getEmail(), authCode)){
             resp.setResult(APIConstants.RESULT_ERROR);
             resp.setMsg("参数不能为空");
             return resp;
@@ -48,7 +50,7 @@ public class RegisterController extends BaseController{
     @RequestMapping("authCode")
     public JsonResp getAuthCode(String phone){
         JsonResp resp = new JsonResp();
-        if(StringUtils.isAnyEmpty(phone)){
+        if(StrUtil.hasEmpty(phone)){
             resp.setResult(APIConstants.RESULT_ERROR);
             resp.setMsg("手机号不能为空");
             return resp;

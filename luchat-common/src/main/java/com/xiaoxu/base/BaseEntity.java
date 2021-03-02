@@ -2,6 +2,7 @@ package com.xiaoxu.base;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  * @create 2021/2/4 14:36
  */
 @Data
-public class BaseEntity{
+public class BaseEntity implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
