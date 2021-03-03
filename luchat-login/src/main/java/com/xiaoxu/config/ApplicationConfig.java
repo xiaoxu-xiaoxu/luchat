@@ -32,7 +32,7 @@ public class ApplicationConfig implements WebMvcConfigurer{
     public void addInterceptors(InterceptorRegistry registry){
         InterceptorRegistration registration = registry.addInterceptor(commonInterceptor);
         registration.addPathPatterns("/**", "/*")
-        .excludePathPatterns("/login/*", "/register/*", "/favicon.ico", "/error");
+                .excludePathPatterns("/login/*", "/register/*", "/favicon.ico", "/error");
     }
 
     @Bean
