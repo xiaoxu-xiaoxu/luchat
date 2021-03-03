@@ -2,8 +2,12 @@ package com.xiaoxu.interceptor;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.xiaoxu.base.JsonResp;
 import com.xiaoxu.base.RedisService;
 import com.xiaoxu.bean.LoginInfo;
+import com.xiaoxu.constants.APIConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -49,12 +53,14 @@ public class CommonInterceptor implements HandlerInterceptor{
             }
 
             if(StrUtil.isEmpty(loginInfo)){
-                response.sendRedirect("http://localhost:7070/login/index");
+                String str = JSONUtil.toJsonStr(new JsonResp("验证token失败", APIConstants.RESULT_SUCCESS, APIConstants.THREE));
+                response.getWriter().write(str);
                 return false;
             }else{
                 LoginInfo login = (LoginInfo) redisService.getBean(loginInfo);
                 if(login == null){
-                    response.sendRedirect("http://localhost:7070/login/index");
+                    String str = JSONUtil.toJsonStr(new JsonResp("验证token失败", APIConstants.RESULT_SUCCESS, APIConstants.THREE));
+                    response.getWriter().write(str);
                     return false;
                 }
                 logger.info("根据cookie登录");

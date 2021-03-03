@@ -21,6 +21,15 @@ public class JsonResp{
 
     private Integer code;
 
+    public JsonResp(){
+    }
+
+    public JsonResp(String msg, Integer result, Integer code){
+        Msg = msg;
+        this.result = result;
+        this.code = code;
+    }
+
     private final HashMap<String, Object> data = new HashMap<>();
 
     public JsonResp putData(String name, Object data){
