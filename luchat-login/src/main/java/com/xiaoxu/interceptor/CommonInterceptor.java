@@ -49,12 +49,12 @@ public class CommonInterceptor implements HandlerInterceptor{
             }
 
             if(StrUtil.isEmpty(loginInfo)){
-                //response.sendRedirect("http://www.baidu.com");
+                response.sendRedirect("http://localhost:7070/login/index");
                 return false;
             }else{
                 LoginInfo login = (LoginInfo) redisService.getBean(loginInfo);
                 if(login == null){
-                    //response.sendRedirect("http://www.google.com");
+                    response.sendRedirect("http://localhost:7070/login/index");
                     return false;
                 }
                 logger.info("根据cookie登录");
