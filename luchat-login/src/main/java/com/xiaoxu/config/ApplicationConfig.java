@@ -31,8 +31,7 @@ public class ApplicationConfig implements WebMvcConfigurer{
     @Override
     public void addInterceptors(InterceptorRegistry registry){
         InterceptorRegistration registration = registry.addInterceptor(commonInterceptor);
-        String[] path = {"/**", "/*"};
-        registration.addPathPatterns(Arrays.asList(path))
+        registration.addPathPatterns("/**", "/*")
         .excludePathPatterns("/login/*", "/register/*", "/favicon.ico", "/error");
     }
 
