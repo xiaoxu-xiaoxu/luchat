@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="t_rs_user">
-  <resultMap id="BaseResultMap" type="com.xiaoxu.bean.User">
+<mapper namespace="t_rs_talk_info">
+  <resultMap id="BaseResultMap" type="com.xiaoxu.bean.TalkInfo">
     <id column="ID" jdbcType="INTEGER" property="id" />
-    <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
-    <result column="USER_KEY" jdbcType="VARCHAR" property="userKey" />
-    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
-    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
-    <result column="SPECIAL_FLG" jdbcType="TINYINT" property="specialFlg" />
-    <result column="HEAD_URL" jdbcType="VARCHAR" property="headUrl" />
+    <result column="TALK_ID" jdbcType="INTEGER" property="talkId" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
     <result column="VERSION_NO" jdbcType="INTEGER" property="versionNo" />
     <result column="DEL_FLG" jdbcType="TINYINT" property="delFlg" />
     <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
@@ -21,46 +16,38 @@
     <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
     <result column="MODIFY_TIME" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xiaoxu.bean.TalkInfo">
+    <result column="TALK_MESSAGE" jdbcType="LONGVARCHAR" property="talkMessage" />
+  </resultMap>
 
   <sql id="Base_Column_List">
-    ID, NAME, PASSWORD, USER_KEY, PHONE, EMAIL, SPECIAL_FLG, HEAD_URL, VERSION_NO, DEL_FLG, 
-    DESCRIPTION, EXTEND_FIELD1, EXTEND_FIELD2, EXTEND_FIELD3, CREATOR, CREATE_TIME, MODIFIER, 
-    MODIFY_TIME
+    ID, TALK_ID, USER_ID, VERSION_NO, DEL_FLG, DESCRIPTION, EXTEND_FIELD1, EXTEND_FIELD2, 
+    EXTEND_FIELD3, CREATOR, CREATE_TIME, MODIFIER, MODIFY_TIME
+  </sql>
+  <sql id="Blob_Column_List">
+    TALK_MESSAGE
   </sql>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
-    from t_lu_user
+    ,
+    <include refid="Blob_Column_List" />
+    from t_lu_talk_info
     where ID = #{id,jdbcType=INTEGER}
   </select>
 
-  <insert id="insertSelective" parameterType="com.xiaoxu.bean.User">
-    insert into t_lu_user
+  <insert id="insertSelective" parameterType="com.xiaoxu.bean.TalkInfo">
+    insert into t_lu_talk_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         ID,
       </if>
-      <if test="name != null">
-        NAME,
+      <if test="talkId != null">
+        TALK_ID,
       </if>
-      <if test="password != null">
-        PASSWORD,
-      </if>
-      <if test="userKey != null">
-        USER_KEY,
-      </if>
-      <if test="phone != null">
-        PHONE,
-      </if>
-      <if test="email != null">
-        EMAIL,
-      </if>
-      <if test="specialFlg != null">
-        SPECIAL_FLG,
-      </if>
-      <if test="headUrl != null">
-        HEAD_URL,
+      <if test="userId != null">
+        USER_ID,
       </if>
       <if test="versionNo != null">
         VERSION_NO,
@@ -92,31 +79,19 @@
       <if test="modifyTime != null">
         MODIFY_TIME,
       </if>
+      <if test="talkMessage != null">
+        TALK_MESSAGE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="talkId != null">
+        #{talkId,jdbcType=INTEGER},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="userKey != null">
-        #{userKey,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="specialFlg != null">
-        #{specialFlg,jdbcType=TINYINT},
-      </if>
-      <if test="headUrl != null">
-        #{headUrl,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="versionNo != null">
         #{versionNo,jdbcType=INTEGER},
@@ -148,32 +123,20 @@
       <if test="modifyTime != null">
         #{modifyTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="talkMessage != null">
+        #{talkMessage,jdbcType=LONGVARCHAR},
+      </if>
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.xiaoxu.bean.User">
-    update t_lu_user
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaoxu.bean.TalkInfo">
+    update t_lu_talk_info
     <set>
-      <if test="name != null">
-        NAME = #{name,jdbcType=VARCHAR},
+      <if test="talkId != null">
+        TALK_ID = #{talkId,jdbcType=INTEGER},
       </if>
-      <if test="password != null">
-        PASSWORD = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="userKey != null">
-        USER_KEY = #{userKey,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        PHONE = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        EMAIL = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="specialFlg != null">
-        SPECIAL_FLG = #{specialFlg,jdbcType=TINYINT},
-      </if>
-      <if test="headUrl != null">
-        HEAD_URL = #{headUrl,jdbcType=VARCHAR},
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
       </if>
       <if test="versionNo != null">
         VERSION_NO = #{versionNo,jdbcType=INTEGER},
@@ -205,8 +168,12 @@
       <if test="modifyTime != null">
         MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="talkMessage != null">
+        TALK_MESSAGE = #{talkMessage,jdbcType=LONGVARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
 
 </mapper>

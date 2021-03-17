@@ -21,4 +21,8 @@ public class User extends BaseEntity{
     private String email;
 
     private String specialFlg;
+
+    private String userKey;
+
+    private String headUrl;
 }

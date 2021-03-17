@@ -2,6 +2,7 @@ package com.xiaoxu;
 
 import com.xiaoxu.dao.impl.UserDao;
 import org.junit.Test;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import sun.security.provider.MD5;
 
 import java.lang.reflect.Method;
