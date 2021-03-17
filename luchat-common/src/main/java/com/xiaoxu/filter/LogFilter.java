@@ -17,7 +17,6 @@ import java.util.UUID;
  * @author xx
  * @create 2021/2/4 15:59
  */
-@Component
 public class LogFilter implements Filter{
 
 

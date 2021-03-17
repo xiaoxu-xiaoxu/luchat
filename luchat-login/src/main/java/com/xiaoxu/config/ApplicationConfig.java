@@ -21,16 +21,10 @@ import java.util.Arrays;
 @Configuration
 public class ApplicationConfig implements WebMvcConfigurer{
 
-    @Resource
-    private LogFilter logFilter;
-
-    @Resource
-    private CommonInterceptor commonInterceptor;
-
 
     @Override
     public void addInterceptors(InterceptorRegistry registry){
-        InterceptorRegistration registration = registry.addInterceptor(commonInterceptor);
+        InterceptorRegistration registration = registry.addInterceptor(new CommonInterceptor());
         registration.addPathPatterns("/**", "/*")
                 .excludePathPatterns("/login/*", "/register/*", "/favicon.ico", "/error");
     }
@@ -38,7 +32,7 @@ public class ApplicationConfig implements WebMvcConfigurer{
     @Bean
     public FilterRegistrationBean<LogFilter> filterRegistrationBean(){
         FilterRegistrationBean<LogFilter> filter = new FilterRegistrationBean<>();
-        filter.setFilter(logFilter);
+        filter.setFilter(new LogFilter());
         filter.setName("logFilter");
         filter.setOrder(1);
         filter.addUrlPatterns("/*");

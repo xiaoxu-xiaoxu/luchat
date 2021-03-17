@@ -1,12 +1,14 @@
 package com.xiaoxu.controller;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.http.HttpUtil;
 import com.github.pagehelper.PageInfo;
 import com.xiaoxu.base.BaseController;
 import com.xiaoxu.base.JsonResp;
 import com.xiaoxu.base.RedisService;
 import com.xiaoxu.bean.LoginInfo;
 import com.xiaoxu.bean.User;
+import com.xiaoxu.constants.APIConstants;
 import com.xiaoxu.service.IUserService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +34,14 @@ public class LoginController extends BaseController{
 
     @Resource
     private RedisService redisService;
+
+    @RequestMapping("index")
+    public JsonResp index(){
+        JsonResp resp = new JsonResp();
+        resp.setMsg("登录首页");
+        resp.setResult(APIConstants.RESULT_SUCCESS);
+        return resp;
+    }
 
     @RequestMapping("login")
     public JsonResp login(HttpServletRequest request, HttpServletResponse response){
