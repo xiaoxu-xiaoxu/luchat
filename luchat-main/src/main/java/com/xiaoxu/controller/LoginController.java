@@ -33,7 +33,7 @@ public class LoginController extends BaseController{
     private IUserService userService;
 
     @Resource
-    private RedisService redisService;
+    private RedisService<String, String> redisService;
 
     @RequestMapping("index")
     public JsonResp index(){
@@ -51,7 +51,7 @@ public class LoginController extends BaseController{
         Cookie cookie = new Cookie("login", uuid);
         cookie.setMaxAge(1220);
         cookie.setPath("/");
-        redisService.expire(uuid, new LoginInfo(), 15L, TimeUnit.SECONDS);
+        redisService.expire(uuid, uuid, 15L, TimeUnit.SECONDS);
         response.addCookie(cookie);
         return resp;
     }

@@ -4,6 +4,7 @@ package com.xiaoxu.base;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 
@@ -11,42 +12,41 @@ import java.util.concurrent.TimeUnit;
  * @author xx
  * @create 2021/2/23 14:43
  */
-public class RedisService{
+public class RedisService<K extends Serializable, V extends Serializable>{
 
     @Resource
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate<K, V> redisTemplate;
 
-    public void set(String key, String value){
+    public void set(K key, V value){
         redisTemplate.opsForValue().set(key, value);
     }
 
-    public String get(String key){
-        return (String) redisTemplate.opsForValue().get(key);
+    public V get(K key){
+        return redisTemplate.opsForValue().get(key);
     }
 
-    public void expire(String key, String value, Long time){
+    public void expire(K key, V value, Long time){
         redisTemplate.opsForValue().set(key, value, time);
     }
 
-    public void expire(String key, Object value, Long time, TimeUnit timeUnit){
+    public void expire(K key, V value, Long time, TimeUnit timeUnit){
         redisTemplate.opsForValue().set(key, value, time, timeUnit);
     }
 
-
-
-    public void delete(String key){
+    public void delete(K key){
         redisTemplate.delete(key);
     }
 
-    public void change(String key, String value){
+    public void change(K key, V value){
         redisTemplate.opsForValue().getAndSet(key, value);
     }
 
-    public <T> void setBean(String key, T t){
+    public void setBean(K key, V t){
         redisTemplate.opsForValue().set(key, t);
     }
 
-    public Object getBean(String key){
+
+    public V getBean(String key){
         return redisTemplate.opsForValue().get(key);
     }
 

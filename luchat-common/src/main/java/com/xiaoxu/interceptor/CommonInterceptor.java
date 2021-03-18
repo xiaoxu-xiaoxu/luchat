@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
 public class CommonInterceptor implements HandlerInterceptor{
 
     @Resource
-    private RedisService redisService;
+    private RedisService<String, String> redisService;
 
     private static final Logger logger = LoggerFactory.getLogger(CommonInterceptor.class);
 
@@ -56,7 +56,7 @@ public class CommonInterceptor implements HandlerInterceptor{
                 response.getWriter().write(str);
                 return false;
             }else{
-                LoginInfo login = (LoginInfo) redisService.getBean(loginInfo);
+                String login = redisService.get(loginInfo);
                 if(login == null){
                     String str = JSONUtil.toJsonStr(new JsonResp("验证token失败", APIConstants.RESULT_SUCCESS, APIConstants.THREE));
                     response.getWriter().write(str);

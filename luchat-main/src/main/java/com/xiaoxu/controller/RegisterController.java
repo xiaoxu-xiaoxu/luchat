@@ -26,7 +26,7 @@ public class RegisterController extends BaseController{
     private IUserService userService;
 
     @Resource
-    private RedisService redisService;
+    private RedisService<String, String> redisService;
 
 
     @RequestMapping("register")
